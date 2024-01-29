@@ -9,6 +9,12 @@
 
 # Summary
 
+This HIP-94 aims to propose an alternative solution to HIP-83, offering to distribute rewards randomly to 14 hotspots that have received a Beacon and responded within a given time window in cases where more than 14 hotspots have responded, and up to an extended time-windows when fewer than 14 hotspots have responded.
+
+Therefore, after several months of rewards based on response speed to Beacons, it is now time to assess if the current system meets the reason for its implementation and whether there might be a more suitable solution that is closer to the expected goal of offering rewards linked to coverage and the ability to transfer useful data on the network.
+
+# Motivation
+
 Currently, the reward system in place selects the first 14 hotspots that received a Beacon. This system was implemented with HIP-83 and replaced the previous system, which randomly chose 14 hotspots among all those that received the Beacon. The system prior to HIP-83 was egalitarian, but it was criticized for favoring hotspots whose response time could be too long to be involved in data transmission, which is the primary objective of the Helium network.
 
 Packet reception is indeed based on the following principle: the first packets received are transmitted by the HPR (Helium Packet Router) to the LNS (LoRa Network Server), which then acquires them. This is within the limit of the number of packets the LNS chooses to acquire, as defined in the max_copies parameter of its route. The packets are acquired without a time limit on the HPR side (effectively 30 minutes) and, generally, within several hundred milliseconds by the LNS. The LNS must adhere to time constraints, in the case of an uplink with acknowledgment or a downlink of 1 or 2 seconds, to comply with the LoRaWAN standard.
@@ -18,12 +24,6 @@ When connecting a device (OTAA), the number of packets acquired can be maximized
 For use cases such as object triangulation, a scenario in which Helium's density presents a distinguishing advantage, it is beneficial to maximize the number of packets purchased within the LNS's reception window. 
 
 A regional LNS would benefit from using windows of about 300 to 700 ms to maximize packet reception without disturbing its capacity to respond within the time constraints imposed by the protocol. A global LNS generally uses a window of 200 to 300 ms for packet reception, allowing time for packets to reach and return from and to a distant area.
-
-Therefore, after several months of rewards based on response speed to Beacons, it is now time to assess if the current system meets the reason for its implementation and whether there might be a more suitable solution that is closer to the expected goal of offering rewards linked to coverage and the ability to transfer useful data on the network.
-
-This HIP-94 aims to propose an alternative solution to HIP-83, offering to distribute rewards randomly to 14 hotspots that have received a Beacon and responded within a given time window in cases where more than 14 hotspots have responded, and up to an extended time-windows when fewer than 14 hotspots have responded.
-
-# Motivation
 
 - Analyzing the selection rate of hotspots under different systems, we observe that the current system excludes a large number of hotspots. The chart below is interpreted as follows:
   - In blue, the random selection of 14 participants in a Proof of Coverage (POC) is represented.
